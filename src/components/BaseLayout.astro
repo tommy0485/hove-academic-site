@@ -1,31 +1,30 @@
 ---
-// Define the properties expected by the layout
+// FIX 1: Import the Header and Footer components from the same directory
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+
+// FIX 2: Define the Props interface to accept the 'meta' object
 interface Props {
-    title: string;
-    description: string;
+    meta: {
+        title: string;
+        description: string;
+    }
 }
 
-// Destructure the props from Astro.props
-const { title, description } = Astro.props;
-
-// Existing imports and frontmatter content (ensure your original content is here)
-// Example imports:
-// import Header from './Header.astro';
-// import Footer from './Footer.astro';
-// import ThemeToggle from './ThemeToggle.astro';
-
-// ... rest of your frontmatter code ...
+// Destructure the meta object
+const { meta } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{title} | Aaron Hove</title>
-        <meta name="description" content={description}>
-        </head>
+        <title>{meta.title} | Aaron Hove</title>
+        <meta name="description" content={meta.description}>
+        <link rel="icon" href="/favicon.svg" />
+    </head>
     <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
-        <Header /> 
+        <Header />
         <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <slot />
         </main>

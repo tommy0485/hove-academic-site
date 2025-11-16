@@ -1,16 +1,22 @@
 ---
-import Layout from '../components/BaseLayout.astro';
+import Layout from '../components/BaseLayout.astro'; // Correct Layout component
 import ResearchInterest from '../components/ResearchInterest.astro';
-// FINAL FIX: Importing the correct, existing component: PublicationCard.astro
+// FIX: Import the correct, existing component file (PublicationCard.astro)
 import PublicationCard from '../components/PublicationCard.astro';
 import publications from '@/data/publications.json';
 import profile from '@/data/profile.json';
 
 const title = "Research";
 const description = "Overview of Aaron Hove's research interests, focus areas, and recent publications.";
+
+// Create the meta object needed by BaseLayout.astro (since other pages use it)
+const meta = {
+  title: title,
+  description: description
+};
 ---
 
-<Layout title={title} description={description}>
+<Layout {meta}>
   <article class="prose dark:prose-invert max-w-none">
     <h1 class="font-bold text-4xl mb-6 text-red-700 dark:text-red-500">Research Focus</h1>
 
@@ -38,7 +44,7 @@ const description = "Overview of Aaron Hove's research interests, focus areas, a
     {publications.length > 0 ? (
       <div class="space-y-6">
         {publications.slice(0, 3).map((pub) => (
-          // FINAL FIX: Using the imported component PublicationCard
+          // Use the imported component name
           <PublicationCard publication={pub} /> 
         ))}
       </div>
