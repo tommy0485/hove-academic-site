@@ -1,7 +1,8 @@
 ---
-import Layout from '../components/BaseLayout.astro'; // FINAL FIX: Correct component and folder name
+import Layout from '../components/BaseLayout.astro';
 import ResearchInterest from '../components/ResearchInterest.astro';
-import PublicationItem from '../components/PublicationItem.astro'; 
+// FINAL FIX: Importing the correct, existing component: PublicationCard.astro
+import PublicationCard from '../components/PublicationCard.astro';
 import publications from '@/data/publications.json';
 import profile from '@/data/profile.json';
 
@@ -37,7 +38,8 @@ const description = "Overview of Aaron Hove's research interests, focus areas, a
     {publications.length > 0 ? (
       <div class="space-y-6">
         {publications.slice(0, 3).map((pub) => (
-          <PublicationItem publication={pub} />
+          // FINAL FIX: Using the imported component PublicationCard
+          <PublicationCard publication={pub} /> 
         ))}
       </div>
     ) : (
