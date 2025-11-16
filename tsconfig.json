@@ -1,5 +1,6 @@
 {
-  "extends": "astro/tsconfig/strict",
+  // FINAL FIX
+  "extends": "astro/tsconfigs/base", 
   "compilerOptions": {
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
