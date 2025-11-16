@@ -10,8 +10,8 @@ const navItems = [
     { name: 'Contact', href: '/contact/' },
 ];
 
-// FIX: Use Astro.base (or Astro.site.pathname if base is not set)
-const currentPath = Astro.url.pathname.replace(Astro.base || '/', '/').toLowerCase();
+// FIX: Use 'as any' to bypass strict TypeScript type-checking for 'Astro.base'
+const currentPath = Astro.url.pathname.replace((Astro as any).base || '/', '/').toLowerCase();
 ---
 
 <header class="bg-white shadow dark:bg-gray-800">
