@@ -7,14 +7,14 @@
     "link": "#",
     "status": "Completed",
     "keywords": ["React Native", "React", "Data"]
-  }, <-- CRITICAL: COMMA ADDED HERE
+  }, 
   {
     "id": "lstm-smoke",
     "title": "LSTM wildfire smoke prediction",
     "role": "Internship",
     "description": "An LSTM model and data pipeline for short-term prediction of PM2.5 concentrations using weather station data and satellite AOD inputs.",
     "link": "#",
-    "status": "In Progress", <-- REQUIRED FIELD ADDED
-    "keywords": ["Python", "TensorFlow", "Meteorology", "Data Science"] <-- REQUIRED FIELD ADDED
+    "status": "In Progress",
+    "keywords": ["Python", "TensorFlow", "Meteorology", "Data Science"]
   }
 ]
