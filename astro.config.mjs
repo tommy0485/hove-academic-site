@@ -10,6 +10,10 @@ export default defineConfig({
 	base: '/hove-academic-site/',
 	// Ensure static output
 	output: 'static',
+    
+    // FIX: Add trailingSlash to ensure GitHub Pages routes correctly
+    trailingSlash: 'always', 
+    
 	integrations: [
 		tailwind({
 			// Apply base styles only once
