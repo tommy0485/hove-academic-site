@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro'; // FIX: Used alias for robust path
 import ResearchInterest from '../components/ResearchInterest.astro';
-import PublicationItem from '../components/PublicationItem.astro';
+import PublicationItem from '@/components/PublicationItem.astro'; // FIX: Used alias for robust path
 import publications from '@/data/publications.json';
 import profile from '@/data/profile.json';
 
@@ -26,7 +26,6 @@ const description = "Overview of Aaron Hove's research interests, focus areas, a
     <h2 class="font-semibold text-3xl mb-4 text-gray-800 dark:text-gray-200">Key Interests</h2>
     <ul class="list-none p-0 flex flex-wrap gap-4">
       {profile.researchInterests.map((interest) => (
-        // FIX APPLIED: Removed the invalid 'role="listitem"' prop
         <ResearchInterest interest={interest} />
       ))}
     </ul>

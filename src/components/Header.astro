@@ -1,58 +1,50 @@
 ---
-import MobileNav from './MobileNav.astro';
 import profile from '@/data/profile.json';
-
 const navItems = [
-	{ name: 'Home', href: '/' },
-	{ name: 'About/Timeline', href: '/about/' },
-	{ name: 'Research', href: '/research/' },
-	{ name: 'Publications', href: '/publications/' },
-	{ name: 'Projects', href: '/projects/' },
-	{ name: 'Teaching', href: '/teaching/' },
-	{ name: 'Contact', href: '/contact/' },
+    { name: 'Home', href: '/' },
+    { name: 'Research', href: '/research/' },
+    { name: 'Publications', href: '/publications/' },
+    { name: 'Projects', href: '/projects/' },
+    { name: 'Teaching', href: '/teaching/' },
+    { name: 'About', href: '/about/' },
+    { name: 'Contact', href: '/contact/' },
 ];
 
+// FIX: Use Astro.base (or Astro.site.pathname if base is not set)
 const currentPath = Astro.url.pathname.replace(Astro.base || '/', '/').toLowerCase();
-
-const isActive = (href: string) => {
-	const cleanHref = href.endsWith('/') ? href : href + '/';
-	return currentPath === cleanHref || (currentPath === '/' && cleanHref === '/');
-};
 ---
 
-<header class="sticky top-0 z-40 w-full backdrop-blur backdrop-filter border-b border-gray-200/50 dark:border-gray-800/50 bg-white/70 dark:bg-gray-900/70">
-	<div class="container mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-		<a
-			href="/"
-			class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-50 hover:text-red-600 dark:hover:text-red-400 transition-colors"
-		>
-			{profile.displayName.split(' ')[0]} <span class="text-red-600 dark:text-red-400">{profile.displayName.split(' ')[1]}</span>
-		</a>
-
-		<nav class="hidden md:flex space-x-1" aria-label="Main navigation">
-			{
-				navItems.map((item) => (
-					<a
-						href={item.href}
-						class:list={[
-							'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-							{
-								'bg-red-50 text-red-600 dark:bg-gray-800 dark:text-red-400': isActive(item.href),
-								'text-gray-600 hover:bg-gray-100 hover:text-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-50': !isActive(
-									item.href
-								),
-							},
-						]}
-						aria-current={isActive(item.href) ? 'page' : undefined}
-					>
-						{item.name}
-					</a>
-				))
-			}
-		</nav>
-
-		<div class="md:hidden">
-			<MobileNav navItems={navItems} currentPath={currentPath} />
-		</div>
-	</div>
+<header class="bg-white shadow dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex-shrink-0">
+                <a href="/" class="text-2xl font-bold tracking-tight text-red-700 dark:text-red-500 hover:text-red-500 dark:hover:text-red-300 transition duration-150">
+                    {profile.displayName.split(' ')[0]}
+                </a>
+            </div>
+            <nav class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    {navItems.map((item) => (
+                        <a
+                            href={item.href}
+                            class:list={[
+                                "px-3 py-2 rounded-md text-sm font-medium transition duration-150",
+                                currentPath === item.href.toLowerCase() ? "bg-red-700 text-white" : "text-gray-900 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700",
+                            ]}
+                            aria-current={currentPath === item.href.toLowerCase() ? "page" : undefined}
+                        >
+                            {item.name}
+                        </a>
+                    ))}
+                </div>
+            </nav>
+            <div class="md:hidden">
+                <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
 </header>
