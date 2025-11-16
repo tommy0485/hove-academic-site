@@ -1,60 +1,55 @@
 ---
-import BaseLayout from '@/components/BaseLayout.astro';
-import ResearchInterest from '@/components/ResearchInterest.astro';
+import Layout from '../layouts/Layout.astro';
+import ResearchInterest from '../components/ResearchInterest.astro';
+import PublicationItem from '../components/PublicationItem.astro';
 import publications from '@/data/publications.json';
 import profile from '@/data/profile.json';
 
-const meta = {
-	title: 'Research',
-	description: `Research interests and current directions for ${profile.displayName}.`,
-};
+const title = "Research";
+const description = "Overview of Aaron Hove's research interests, focus areas, and recent publications.";
 ---
 
-<BaseLayout {meta}>
-	<article class="prose dark:prose-invert max-w-none">
-		<header class="mb-10">
-			<h1 class="text-4xl font-extrabold text-gray-900 dark:text-gray-50 border-b pb-4 border-gray-200 dark:border-gray-700">
-				🔬 Research
-			</h1>
-			<p class="mt-2 text-xl text-gray-600 dark:text-gray-300">
-				Overview of my primary research focus areas and ongoing work.
-			</p>
-		</header>
+<Layout title={title} description={description}>
+  <article class="prose dark:prose-invert max-w-none">
+    <h1 class="font-bold text-4xl mb-6 text-red-700 dark:text-red-500">Research Focus</h1>
 
-		<section class="mb-12">
-			<h2 class="text-3xl font-bold mb-6 text-red-600 dark:text-red-400">Current Interests & Expertise</h2>
-			<ul class="grid grid-cols-1 md:grid-cols-2 gap-4" role="list">
-				{profile.researchInterests.map((interest) => (
-					<ResearchInterest interest={interest} role="listitem" />
-				))}
-			</ul>
-		</section>
+    <p class="lead">
+      My research is focused on {profile.researchSummary}. I utilize computational methods and data science techniques to address complex problems in areas such as {profile.researchInterests.slice(0, 3).join(', ')}.
+    </p>
 
-		<section class="mb-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-lg">
-			<h2 class="text-3xl font-bold mb-4 text-red-600 dark:text-red-400">Focus: Time-Series Prediction for Environmental Modeling</h2>
-			<p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-				My primary research focus involves applying **advanced machine learning models**, specifically Long Short-Term Memory (LSTM) and Transformer networks, to complex time-series data. I am particularly interested in **environmental prediction**, such as forecasting **wildfire smoke plume behavior (PM2.5)**, to provide critical, short-term actionable intelligence for public health and environmental agencies.
-			</p>
-			<p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-				This work involves **large-scale data processing**, **data pipeline optimization**, and the creation of highly accurate predictive models that account for temporal dependencies and non-linear patterns.
-			</p>
-		</section>
+    <p>
+      My primary goal is to bridge theoretical computer science with real-world applications, delivering impactful results in both academic and industrial settings.
+    </p>
 
-		<section>
-			<h2 class="text-3xl font-bold mb-6 text-red-600 dark:text-red-400">Related Publications</h2>
-			<p class="mb-4 text-gray-700 dark:text-gray-300">
-				Find a complete, filterable list on the <a href="/publications" class="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium transition-colors">Publications page</a>.
-			</p>
+    <hr class="my-8" />
 
-			<ul class="list-disc list-outside space-y-3 text-gray-700 dark:text-gray-300 ml-4">
-				{publications.slice(0, 3).map((pub) => (
-					<li class="pl-2">
-						<a href={pub.url || '/publications'} class="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium transition-colors">
-							{pub.title}
-						</a>. {pub.authors[0]} et al. ({pub.year}). {pub.venue}.
-					</li>
-				))}
-			</ul>
-		</section>
-	</article>
-</BaseLayout>
+    <h2 class="font-semibold text-3xl mb-4 text-gray-800 dark:text-gray-200">Key Interests</h2>
+    <ul class="list-none p-0 flex flex-wrap gap-4">
+      {profile.researchInterests.map((interest) => (
+        // FIX APPLIED: Removed the invalid 'role="listitem"' prop
+        <ResearchInterest interest={interest} />
+      ))}
+    </ul>
+
+    <hr class="my-8" />
+
+    <h2 class="font-semibold text-3xl mb-4 text-gray-800 dark:text-gray-200">Recent Publications</h2>
+
+    {publications.length > 0 ? (
+      <div class="space-y-6">
+        {publications.slice(0, 3).map((pub) => (
+          <PublicationItem publication={pub} />
+        ))}
+      </div>
+    ) : (
+      <p>No recent publications to display. Check back soon!</p>
+    )}
+
+    <div class="mt-8 text-center">
+      <a href="/publications/" class="text-lg font-medium text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-200 transition duration-300">
+        View All Publications &rarr;
+      </a>
+    </div>
+
+  </article>
+</Layout>

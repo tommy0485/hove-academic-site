@@ -12,7 +12,7 @@ const navItems = [
 	{ name: 'Contact', href: '/contact/' },
 ];
 
-const currentPath = Astro.url.pathname.replace(Astro.config.base || '/', '/').toLowerCase();
+const currentPath = Astro.url.pathname.replace(Astro.base || '/', '/').toLowerCase();
 
 const isActive = (href: string) => {
 	const cleanHref = href.endsWith('/') ? href : href + '/';
