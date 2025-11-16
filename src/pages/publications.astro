@@ -1,0 +1,30 @@
+---
+import BaseLayout from '@/components/BaseLayout.astro';
+import PublicationList from '@/components/PublicationList.tsx';
+import publications from '@/data/publications.json';
+import profile from '@/data/profile.json';
+import type { Publication } from '@/types';
+
+// Sort publications by year descending
+const sortedPublications: Publication[] = [...(publications as Publication[])].sort((a, b) => b.year - a.year);
+
+const meta = {
+	title: 'Publications',
+	description: `A list of research publications by ${profile.displayName}. Includes client-side filtering by keywords.`,
+};
+---
+
+<BaseLayout {meta}>
+	<article class="prose dark:prose-invert max-w-none">
+		<header class="mb-10">
+			<h1 class="text-4xl font-extrabold text-gray-900 dark:text-gray-50 border-b pb-4 border-gray-200 dark:border-gray-700">
+				📖 Publications
+			</h1>
+			<p class="mt-2 text-xl text-gray-600 dark:text-gray-300">
+				Peer-reviewed papers, pre-prints, and workshop contributions.
+			</p>
+		</header>
+
+		<PublicationList publications={sortedPublications} client:load />
+	</article>
+</BaseLayout>

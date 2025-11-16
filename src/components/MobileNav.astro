@@ -1,0 +1,121 @@
+---
+import ToggleButton from './ToggleButton.astro';
+
+interface NavItem {
+	name: string;
+	href: string;
+}
+
+interface Props {
+	navItems: NavItem[];
+	currentPath: string;
+}
+
+const { navItems, currentPath } = Astro.props;
+
+const isActive = (href: string) => {
+	const cleanHref = href.endsWith('/') ? href : href + '/';
+	return currentPath === cleanHref || (currentPath === '/' && cleanHref === '/');
+};
+---
+
+<div x-data="{ open: false }" class="relative z-50">
+	<ToggleButton id="mobile-menu-button" controls="mobile-menu" label="Toggle menu" @click="open = !open" x-bind:aria-expanded="open" />
+
+	<div
+		x-cloak
+		x-show="open"
+		x-transition:enter="transition ease-out duration-200"
+		x-transition:enter-start="opacity-0 scale-95"
+		x-transition:enter-end="opacity-100 scale-100"
+		x-transition:leave="transition ease-in duration-150"
+		x-transition:leave-start="opacity-100 scale-100"
+		x-transition:leave-end="opacity-0 scale-95"
+		class="absolute right-0 mt-2 w-56 origin-top-right rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none bg-white dark:bg-gray-800"
+		role="menu"
+		aria-orientation="vertical"
+		aria-labelledby="mobile-menu-button"
+		id="mobile-menu"
+		@click.outside="open = false"
+	>
+		<div class="py-1" role="none">
+			{
+				navItems.map((item) => (
+					<a
+						href={item.href}
+						class:list={[
+							'block px-4 py-2 text-sm transition-colors',
+							{
+								'bg-red-50 text-red-600 dark:bg-gray-700 dark:text-red-400 font-semibold': isActive(item.href),
+								'text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white': !isActive(
+									item.href
+								),
+							},
+						]}
+						role="menuitem"
+						tabindex={isActive(item.href) ? 0 : -1}
+						aria-current={isActive(item.href) ? 'page' : undefined}
+					>
+						{item.name}
+					</a>
+				))
+			}
+		</div>
+	</div>
+</div>
+
+<script>
+	// Simple Alpine.js replacement script for the toggle functionality
+	// This ensures the site remains fully static and fast, using vanilla JS for simple interactivity
+	document.addEventListener('DOMContentLoaded', () => {
+		const button = document.getElementById('mobile-menu-button');
+		const menu = document.getElementById('mobile-menu');
+
+		if (!button || !menu) return;
+
+		let open = false;
+
+		const toggleMenu = (shouldOpen: boolean) => {
+			open = shouldOpen;
+			menu.classList.toggle('hidden', !open);
+			button.setAttribute('aria-expanded', open.toString());
+			// Simple transition class simulation
+			if (open) {
+				menu.classList.remove('opacity-0', 'scale-95');
+				menu.classList.add('opacity-100', 'scale-100');
+			} else {
+				menu.classList.remove('opacity-100', 'scale-100');
+				menu.classList.add('opacity-0', 'scale-95');
+			}
+		};
+
+		// Initial state setup
+		menu.classList.add('hidden');
+		menu.classList.add('transition', 'duration-200', 'ease-out');
+
+		button.addEventListener('click', () => {
+			toggleMenu(!open);
+		});
+
+		// Close when clicking outside
+		document.addEventListener('click', (event) => {
+			if (open && !menu.contains(event.target as Node) && !button.contains(event.target as Node)) {
+				toggleMenu(false);
+			}
+		});
+
+		// Close on escape key
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape') {
+				toggleMenu(false);
+			}
+		});
+	});
+</script>
+
+<style>
+	/* Alpine x-cloak replacement */
+	[x-cloak] {
+		display: none !important;
+	}
+</style>

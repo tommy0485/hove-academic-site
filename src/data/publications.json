@@ -1,0 +1,41 @@
+[
+  {
+    "title": "Future Publication 1",
+    "authors": ["Aaron Hove", "J. Doe", "R. Smith"],
+    "venue": "Future Venue",
+    "year": 2025,
+    "keywords": ["NA", "NA", "NA", "NA"],
+    "url": "#",
+    "pdf": "#",
+    "code": "https://TBD"
+  },
+  {
+    "title": "Future Publication 2",
+    "authors": ["Aaron Hove", "J. Doe", "R. Smith"],
+    "venue": "Future Venue",
+    "year": 2025,
+    "keywords": ["NA", "NA", "NA", "NA"],
+    "url": "#",
+    "pdf": "#",
+    "code": "https://TBD"
+    "note": "NA"
+  },
+  {
+    "title": "Future Publication 3",
+    "authors": ["Aaron Hove", "J. Doe", "R. Smith"],
+    "venue": "Future Venue",
+    "year": 2025,
+    "keywords": ["NA", "NA", "NA", "NA"],
+    "url": "#",
+    "pdf": "#",
+  },
+  {
+    "title": "Future Publication 4",
+    "authors": ["Aaron Hove", "J. Doe", "R. Smith"],
+    "venue": "Future Venue",
+    "year": 2025,
+    "keywords": ["NA", "NA", "NA", "NA"],
+    "url": "#",
+    "pdf": "#",
+  }
+]

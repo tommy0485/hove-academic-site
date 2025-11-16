@@ -1,0 +1,50 @@
+---
+import ToggleButton from './ToggleButton.astro';
+// Base component for the client-side theme toggle
+---
+
+<ToggleButton id="theme-toggle-button" controls="theme-toggle-status" label="Toggle theme (light/dark)" client:load />
+
+<script>
+	// Theme toggle script for client-side storage and theme switching
+	const toggleTheme = () => {
+		const html = document.documentElement;
+		const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
+		const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+		if (newTheme === 'dark') {
+			html.classList.add('dark');
+		} else {
+			html.classList.remove('dark');
+		}
+		window.localStorage.setItem('theme', newTheme);
+		updateToggleIcon(newTheme);
+	};
+
+	const updateToggleIcon = (theme: string) => {
+		const button = document.getElementById('theme-toggle-button');
+		if (button) {
+			const isDark = theme === 'dark';
+			// Sun Icon for Light mode (to switch to Dark)
+			const sunIcon = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>`;
+			// Moon Icon for Dark mode (to switch to Light)
+			const moonIcon = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>`;
+
+			button.innerHTML = isDark ? sunIcon : moonIcon;
+			button.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+			const status = document.getElementById('theme-toggle-status');
+			if (status) status.textContent = isDark ? 'Dark theme active' : 'Light theme active';
+		}
+	};
+
+	document.addEventListener('DOMContentLoaded', () => {
+		const button = document.getElementById('theme-toggle-button');
+		if (button) {
+			button.addEventListener('click', toggleTheme);
+
+			// Initial update based on the state set in BaseLayout
+			const initialTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+			updateToggleIcon(initialTheme);
+		}
+	});
+</script>

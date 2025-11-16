@@ -1,0 +1,16 @@
+[
+  {
+    "id": "goplay",
+    "title": "GoPlay — Local Missoula events app",
+    "role": "Capstone Project",
+    "description": "A mobile-first app that aggregates local events in Missoula, supports filters by date and category, and includes event RSVP features.",
+    "link": "#"
+  },
+  {
+    "id": "lstm-smoke",
+    "title": "LSTM wildfire smoke prediction",
+    "role": "Research / Capstone",
+    "description": "An LSTM model and data pipeline for short-term prediction of PM2.5 concentrations using weather station data and satellite AOD inputs.",
+    "link": "#"
+  }
+]

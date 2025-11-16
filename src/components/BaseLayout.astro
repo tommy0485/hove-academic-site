@@ -1,0 +1,75 @@
+---
+import type { SiteMeta } from '@/types';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/700.css';
+import '@/styles/global.css';
+
+interface Props {
+	meta: SiteMeta;
+}
+
+const {
+	meta: { title, description, ogImage, canonicalURL },
+} = Astro.props;
+
+// Default image if none is provided
+const defaultOgImage = `${Astro.site?.href || 'https://tommy0485.github.io/hove-academic-site/'}social-card.png`;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title} | Aaron Hove</title>
+		<meta name="description" content={description} />
+
+		<link rel="icon" type="image/svg+xml" href={Astro.site?.href + "favicon.svg"} />
+		{canonicalURL && <link rel="canonical" href={canonicalURL} />}
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL || Astro.site?.href} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage || defaultOgImage} />
+
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={canonicalURL || Astro.site?.href} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={ogImage || defaultOgImage} />
+
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+
+			if (theme === 'light') {
+				document.documentElement.classList.remove('dark');
+			} else {
+				document.documentElement.classList.add('dark');
+			}
+			window.localStorage.setItem('theme', theme);
+		</script>
+	</head>
+	<body class="bg-white text-gray-900 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-50">
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:p-2 focus:bg-red-600 focus:text-white focus:z-50">Skip to content</a>
+		<Header />
+		<main id="main-content" class="min-h-screen container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+			<slot />
+		</main>
+		<div class="fixed bottom-4 right-4 z-40">
+			<ThemeToggle />
+		</div>
+		<Footer />
+	</body>
+</html>

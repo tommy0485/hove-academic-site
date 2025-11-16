@@ -1,0 +1,16 @@
+{
+  "displayName": "Aaron Hove",
+  "role": "Computer Science Major – Software Engineering",
+  "institution": "The University of Montana",
+  "location": "Missoula, Montana, USA",
+  "email": "aaron.hove@umontana.edu",
+  "githubUsername": "tommy0485",
+  "bio": "I was born in Kalispell, Montana. I am an aspiring software engineer currently studying Computer Science at the University of Montana with a concentration in Software Engineering, graduating Fall 2025. While at UM I earned placement on the Dean’s List twice and the President’s 4.0 List once, and was inducted into the Golden Key Honor Society and Phi Kappa Phi. I completed a paid internship with UM's Autonomous Aerial Systems Office (AASO), where I helped develop an LSTM algorithm for aerial research. Previously I studied at Flathead Valley Community College (graduated with honors, 2008) and Flathead High School (lettered, 4.0 GPA, graduated 2004). I have been accepted into the Montana State University M.S. in Cybersecurity program, which I plan to start Spring 2026.",
+  "researchInterests": [
+    "Long-short term memory (LSTM) machine learning models",
+    "Time-series prediction",
+    "Wildfire smoke plume modeling",
+    "Mobile app development",
+    "Cybersecurity"
+  ]
+}

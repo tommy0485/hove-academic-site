@@ -1,0 +1,46 @@
+---
+import BaseLayout from '@/components/BaseLayout.astro';
+import ContactForm from '@/components/ContactForm.tsx';
+import profile from '@/data/profile.json';
+
+const meta = {
+	title: 'Contact',
+	description: `Contact information and form for ${profile.displayName}.`,
+};
+---
+
+<BaseLayout {meta}>
+	<article class="prose dark:prose-invert max-w-none">
+		<header class="mb-10 text-center">
+			<h1 class="text-4xl font-extrabold text-gray-900 dark:text-gray-50">
+				📬 Contact
+			</h1>
+			<p class="mt-2 text-xl text-gray-600 dark:text-gray-300">
+				I'd be happy to hear from you.
+			</p>
+		</header>
+
+		<section class="mb-12">
+			<ContactForm client:load />
+		</section>
+
+		<section class="text-center">
+			<h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400">Other Channels</h2>
+			<div class="flex justify-center space-x-6 text-lg">
+				<a
+					href={`https://github.com/${profile.githubUsername}`}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-gray-700 hover:text-red-600 dark:text-gray-300 dark:hover:text-red-400 transition-colors"
+					aria-label="Aaron Hove's GitHub Profile"
+				>
+					GitHub
+				</a>
+				<span class="text-gray-400 dark:text-gray-500">|</span>
+				<p class="text-gray-700 dark:text-gray-300">
+					Location: {profile.location}
+				</p>
+			</div>
+		</section>
+	</article>
+</BaseLayout>

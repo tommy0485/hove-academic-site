@@ -1,0 +1,93 @@
+<script>
+	// Simple Intersection Observer to animate timeline elements into view
+	document.addEventListener('DOMContentLoaded', () => {
+		const timelineItems = document.querySelectorAll('.timeline-item');
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('in-view');
+					} else {
+						entry.target.classList.remove('in-view');
+					}
+				});
+			},
+			{ threshold: 0.1 } // Trigger when 10% of the item is visible
+		);
+
+		timelineItems.forEach((item) => {
+			observer.observe(item);
+		});
+	});
+</script>
+
+<div class="relative timeline-container" aria-label="Professional and Academic Timeline">
+	<div class="absolute left-1/2 top-0 bottom-0 w-1 bg-gray-200 dark:bg-gray-700 -ml-0.5 hidden md:block"></div>
+
+	<article class="timeline-item left md:pr-12" role="listitem">
+		<div class="md:text-right">
+			<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50">Accepted into MSU M.S. in Cybersecurity</h3>
+			<p class="text-sm text-gray-500 dark:text-gray-400">Spring 2026</p>
+		</div>
+		<div class="timeline-dot bg-red-600 dark:bg-red-400"></div>
+		<div class="timeline-content bg-red-50 dark:bg-gray-800 p-4 rounded-lg shadow-md border border-red-200 dark:border-red-800">
+			<p class="text-gray-700 dark:text-gray-300 font-medium">Montana State University M.S. in Cybersecurity (starts Spring 2026).</p>
+		</div>
+	</article>
+
+	<article class="timeline-item right md:pl-12" role="listitem">
+		<div class="md:text-left">
+			<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50">Anticipated Graduation, B.S. in CS</h3>
+			<p class="text-sm text-gray-500 dark:text-gray-400">Fall 2025</p>
+		</div>
+		<div class="timeline-dot bg-red-600 dark:bg-red-400"></div>
+		<div class="timeline-content bg-red-50 dark:bg-gray-800 p-4 rounded-lg shadow-md border border-red-200 dark:border-red-800">
+			<p class="text-gray-700 dark:text-gray-300">The University of Montana B.S. in Computer Science with a concentration in Software Engineering.</p>
+		</div>
+	</article>
+
+	<article class="timeline-item left md:pr-12" role="listitem">
+		<div class="md:text-right">
+			<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50">Autonomous Aerial Systems Office Internship</h3>
+			<p class="text-sm text-gray-500 dark:text-gray-400">Timeframe TBD</p>
+		</div>
+		<div class="timeline-dot bg-red-600 dark:bg-red-400"></div>
+		<div class="timeline-content bg-red-50 dark:bg-gray-800 p-4 rounded-lg shadow-md border border-red-200 dark:border-red-800">
+			<p class="text-gray-700 dark:text-gray-300">Developed an LSTM algorithm for aerial research, contributing to data analysis and time-series prediction.</p>
+		</div>
+	</article>
+
+	<article class="timeline-item right md:pl-12" role="listitem">
+		<div class="md:text-left">
+			<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50">B.S. in Computer Science Program</h3>
+			<p class="text-sm text-gray-500 dark:text-gray-400">Started 2023</p>
+		</div>
+		<div class="timeline-dot bg-red-600 dark:bg-red-400"></div>
+		<div class="timeline-content bg-red-50 dark:bg-gray-800 p-4 rounded-lg shadow-md border border-red-200 dark:border-red-800">
+			<p class="text-gray-700 dark:text-gray-300">Began studies at The University of Montana, focusing on Software Engineering.</p>
+		</div>
+	</article>
+
+	<article class="timeline-item left md:pr-12" role="listitem">
+		<div class="md:text-right">
+			<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50">Flathead Valley Community College</h3>
+			<p class="text-sm text-gray-500 dark:text-gray-400">Graduated 2008</p>
+		</div>
+		<div class="timeline-dot bg-red-600 dark:bg-red-400"></div>
+		<div class="timeline-content bg-red-50 dark:bg-gray-800 p-4 rounded-lg shadow-md border border-red-200 dark:border-red-800">
+			<p class="text-gray-700 dark:text-gray-300">Completed initial studies, graduating with honors.</p>
+		</div>
+	</article>
+
+	<article class="timeline-item right md:pl-12" role="listitem">
+		<div class="md:text-left">
+			<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50">Flathead High School</h3>
+			<p class="text-sm text-gray-500 dark:text-gray-400">Graduated 2004</p>
+		</div>
+		<div class="timeline-dot bg-red-600 dark:bg-red-400"></div>
+		<div class="timeline-content bg-red-50 dark:bg-gray-800 p-4 rounded-lg shadow-md border border-red-200 dark:border-red-800">
+			<p class="text-gray-700 dark:text-gray-300">Graduated with a 4.0 GPA.</p>
+		</div>
+	</article>
+</div>

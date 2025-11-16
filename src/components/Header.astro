@@ -1,0 +1,58 @@
+---
+import MobileNav from './MobileNav.astro';
+import profile from '@/data/profile.json';
+
+const navItems = [
+	{ name: 'Home', href: '/' },
+	{ name: 'About/Timeline', href: '/about/' },
+	{ name: 'Research', href: '/research/' },
+	{ name: 'Publications', href: '/publications/' },
+	{ name: 'Projects', href: '/projects/' },
+	{ name: 'Teaching', href: '/teaching/' },
+	{ name: 'Contact', href: '/contact/' },
+];
+
+const currentPath = Astro.url.pathname.replace(Astro.config.base || '/', '/').toLowerCase();
+
+const isActive = (href: string) => {
+	const cleanHref = href.endsWith('/') ? href : href + '/';
+	return currentPath === cleanHref || (currentPath === '/' && cleanHref === '/');
+};
+---
+
+<header class="sticky top-0 z-40 w-full backdrop-blur backdrop-filter border-b border-gray-200/50 dark:border-gray-800/50 bg-white/70 dark:bg-gray-900/70">
+	<div class="container mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+		<a
+			href="/"
+			class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-50 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+		>
+			{profile.displayName.split(' ')[0]} <span class="text-red-600 dark:text-red-400">{profile.displayName.split(' ')[1]}</span>
+		</a>
+
+		<nav class="hidden md:flex space-x-1" aria-label="Main navigation">
+			{
+				navItems.map((item) => (
+					<a
+						href={item.href}
+						class:list={[
+							'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+							{
+								'bg-red-50 text-red-600 dark:bg-gray-800 dark:text-red-400': isActive(item.href),
+								'text-gray-600 hover:bg-gray-100 hover:text-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-50': !isActive(
+									item.href
+								),
+							},
+						]}
+						aria-current={isActive(item.href) ? 'page' : undefined}
+					>
+						{item.name}
+					</a>
+				))
+			}
+		</nav>
+
+		<div class="md:hidden">
+			<MobileNav navItems={navItems} currentPath={currentPath} />
+		</div>
+	</div>
+</header>

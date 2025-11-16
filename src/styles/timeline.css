@@ -1,0 +1,122 @@
+/* Custom styles for the responsive timeline component */
+
+.timeline-container {
+    padding: 20px 0;
+}
+
+.timeline-item {
+    display: flex;
+    position: relative;
+    margin-bottom: 50px;
+    align-items: center; /* Align dot and content on the same axis */
+    opacity: 0; /* Hidden by default for animation */
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.timeline-item.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+}
+
+.timeline-content {
+    flex-grow: 1;
+}
+
+/* Mobile: Single-column layout */
+.timeline-item {
+    flex-direction: column;
+    align-items: flex-start;
+    border-left: 2px solid theme('colors.gray.200');
+    padding-left: 20px;
+    margin-left: 10px;
+}
+
+.timeline-dot {
+    left: -11px; /* Position dot over the mobile vertical line */
+    top: 0;
+}
+
+.timeline-item > div:first-child { /* Time/Title block */
+    margin-bottom: 10px;
+    padding-left: 0;
+    text-align: left;
+    width: 100%;
+}
+
+/* Tablet and Desktop: Two-column layout */
+@media (min-width: 768px) {
+    .timeline-item {
+        flex-direction: row;
+        border-left: none; /* Remove mobile vertical line */
+        margin-left: 0;
+        min-height: 140px; /* Ensure space for the dot and line */
+    }
+    
+    .timeline-item > div:first-child { /* Time/Title block */
+        width: 50%;
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    .timeline-item .timeline-content {
+        width: 50%;
+        padding: 1rem;
+    }
+
+    .timeline-dot {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        margin: 0;
+    }
+
+    /* Left side items */
+    .timeline-item.left {
+        justify-content: flex-start;
+        padding-left: 0; /* Remove mobile padding */
+        text-align: right;
+    }
+
+    .timeline-item.left > div:first-child {
+        order: 1;
+        padding-right: 20px;
+    }
+    .timeline-item.left .timeline-content {
+        order: 2;
+        padding-right: 0;
+        padding-left: 20px;
+    }
+    .timeline-item.left .timeline-content {
+        /* Content block is on the right side of the dot */
+        text-align: left;
+    }
+
+    /* Right side items */
+    .timeline-item.right {
+        justify-content: flex-end;
+        padding-left: 0; /* Remove mobile padding */
+    }
+
+    .timeline-item.right > div:first-child {
+        order: 2;
+        padding-left: 20px;
+    }
+    .timeline-item.right .timeline-content {
+        order: 1;
+        padding-left: 0;
+        padding-right: 20px;
+        /* Content block is on the left side of the dot */
+        text-align: right;
+    }
+}

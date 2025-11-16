@@ -1,0 +1,47 @@
+---
+import BaseLayout from '@/components/BaseLayout.astro';
+import Timeline from '@/components/Timeline.astro';
+import profile from '@/data/profile.json';
+import '@/styles/timeline.css';
+
+const meta = {
+	title: 'About & Timeline',
+	description: `A timeline and biography of ${profile.displayName}, Computer Science Major at The University of Montana.`,
+};
+---
+
+<BaseLayout {meta}>
+	<article class="prose dark:prose-invert max-w-none">
+		<header class="mb-10">
+			<h1 class="text-4xl font-extrabold text-gray-900 dark:text-gray-50 border-b pb-4 border-gray-200 dark:border-gray-700">
+				📚 About Me & Academic Timeline
+			</h1>
+		</header>
+
+		<section class="mb-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-lg">
+			<h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400">Biography</h2>
+			<p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
+				{profile.bio}
+			</p>
+		</section>
+
+		<section class="mb-12">
+			<h2 class="text-3xl font-bold mb-8 text-gray-900 dark:text-gray-50 text-center">
+				Academic and Professional Journey
+			</h2>
+			<Timeline />
+		</section>
+
+		<section class="mb-12">
+			<h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400">Awards and Honors</h2>
+			<ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 ml-4">
+				<li>President’s 4.0 List (The University of Montana)</li>
+				<li>Dean’s List (Twice at The University of Montana)</li>
+				<li>Inducted into Phi Kappa Phi Honor Society</li>
+				<li>Inducted into Golden Key Honor Society</li>
+				<li>Graduated with Honors (Flathead Valley Community College)</li>
+				<li>4.0 GPA High School Graduate (Flathead High School)</li>
+			</ul>
+		</section>
+	</article>
+</BaseLayout>
